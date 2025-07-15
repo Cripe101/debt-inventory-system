@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomeLayout } from "./layouts/HomeLayout";
 import Homepage from "./pages/Homepage";
+import Listpage from "./pages/Listpage";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Homepage />,
+      },
+      {
+        path: "/list",
+        element: <Listpage />,
       },
     ],
   },
