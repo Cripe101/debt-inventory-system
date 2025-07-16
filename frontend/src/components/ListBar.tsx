@@ -1,13 +1,13 @@
 import { useState } from "react";
 import TabBar from "./TabBar";
-import { FiHome, FiUser } from "react-icons/fi";
+import { FiPackage, FiPlus } from "react-icons/fi";
 
-const Navbar = () => {
-  const [selected, setSelected] = useState("Home");
+const ListBar = () => {
+  const [selected, setSelected] = useState("Product List");
   console.log(selected);
   const tabs = [
-    { label: "Home", icon: <FiHome /> },
-    { label: "Debtors", icon: <FiUser /> },
+    { label: "Product List", icon: <FiPackage /> },
+    { label: "Add Product", icon: <FiPlus /> },
   ];
 
   return (
@@ -15,10 +15,10 @@ const Navbar = () => {
       <TabBar
         tabs={tabs}
         onTabChange={(tab) => setSelected(tab)}
-        initialTab="Home"
+        initialTab="Product List"
       />
     </div>
   );
 };
 
-export default Navbar;
+export default ListBar;

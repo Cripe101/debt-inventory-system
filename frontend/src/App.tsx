@@ -3,7 +3,9 @@ import { ToastContainer } from "react-toastify";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomeLayout } from "./layouts/HomeLayout";
 import Homepage from "./pages/Homepage";
-import Listpage from "./pages/Listpage";
+import ProductList from "./components/list/ProductList";
+import { ListLayout } from "./layouts/ListLayout";
+import DebtorList from "./components/list/DebtorList";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +17,18 @@ const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: "/list",
-        element: <Listpage />,
+        path: "/debtors",
+        element: <DebtorList />,
+      },
+    ],
+  },
+  {
+    path: "/listpage",
+    element: <ListLayout />,
+    children: [
+      {
+        path: "/listpage/product-list",
+        element: <ProductList />,
       },
     ],
   },
