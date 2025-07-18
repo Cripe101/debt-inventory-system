@@ -1,4 +1,5 @@
 {
+  "proxy": "http://localhost:3000/api",
   "name": "nope",
   "private": true,
   "version": "0.0.0",
@@ -13,9 +14,12 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "@tanstack/react-query": "^5.81.5",
+    "axios": "^1.10.0",
+    "jwt-decode": "^4.0.0",
     "proxy": "^2.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.60.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.3",
     "react-toastify": "^11.0.5",

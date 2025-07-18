@@ -53,9 +53,9 @@ const TabBar = ({ tabs, onTabChange, initialTab }: TabBarProps) => {
             onClick={() => {
               handleTabClick(tab.label);
               tab.label === "Home"
-                ? navigate("/")
+                ? navigate("/home")
                 : tab.label === "Debtors"
-                ? navigate("/debtors")
+                ? navigate("/home/debtors")
                 : "";
             }}
           >

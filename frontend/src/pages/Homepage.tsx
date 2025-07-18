@@ -1,14 +1,38 @@
 import { FiUser, FiList } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { authState } from "../store/auth";
+import { useState } from "react";
 
 const Homepage = () => {
   const navigate = useNavigate();
+  const user = authState.user;
+  const [click, setClick] = useState(false);
   return (
     <div className="flex flex-col gap-3 w-full p-2">
-      <h1 className="flex items-center justify-center gap-1 w-20 text-center text-sm sticky bg-white/35 backdrop-blur-md p-2 rounded-2xl text-blue-800 font-snas font-semibold left-0">
-        <FiUser size={18} />
-        Cripe
-      </h1>
+      {/* User Icon */}
+      <section className="relative flex items-center">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          type="button"
+          className={`${
+            click ? "left-22 bg-red-800" : "left-1"
+          } absolute py-1.5 px-3 rounded-2xl border border-white/90  font-semibold font-sans text-sm text-white active:scale-90 duration-300`}
+        >
+          Logout
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setClick(!click);
+          }}
+          className="flex items-center justify-center gap-1 w-20 text-center text-sm sticky border border-black/35 bg-white/35 backdrop-blur-md p-2 rounded-2xl text-blue-800 font-snas font-semibold left-0 active:scale-90 duration-200"
+        >
+          <FiUser size={18} />
+          {user.username}
+        </button>
+      </section>
       <div className="w-full grid gap-3">
         <section className="grid grid-cols-2 gap-3 text-2xl font-sans">
           <h1 className="flex flex-col w-full text-center p-5 backdrop-blur-md bg-white/35 rounded-2xl">
@@ -27,7 +51,7 @@ const Homepage = () => {
               onClick={() => {
                 navigate("/listpage/product-list");
               }}
-              className="border border-white bg-blue-500/90 text-white p-1 text-lg rounded-md active:scale-75 duration-200"
+              className="border border-white bg-blue-500/90 text-white px-3 p-1 text-lg rounded-md active:scale-75 duration-200"
             >
               <FiList />
             </button>
