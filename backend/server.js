@@ -9,6 +9,7 @@ const cors = require("cors");
 //Routes
 const userRoutes = require("./routes/userRoutes.js");
 const authRoutes = require("./routes/authRoutes.js");
+const productRoutes = require("./routes/productListRoutes.js");
 
 //Main
 const app = express();
@@ -22,6 +23,7 @@ app.use(passport.initialize());
 app.use(jsonParser);
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
 
 app.get("/", (req, res) => {
   res.json({

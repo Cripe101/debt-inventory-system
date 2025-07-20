@@ -3,22 +3,25 @@ const roles = require("../constants/roles");
 
 const userSchema = new mongoose.Schema(
   {
-    products: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-      },
-    ],
     debtors: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Debtors",
       },
     ],
-    inventory: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Inventory",
-    },
+    inventory: [
+      {
+        product: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "ProductList",
+        },
+        quantity: {
+          type: Number,
+          default: 0,
+          required: true,
+        },
+      },
+    ],
     username: { type: String, required: true, unique: true },
     password: {
       type: String,
@@ -39,11 +42,13 @@ const userSchema = new mongoose.Schema(
     phone: {
       type: String,
     },
-    roles: {
-      type: String,
-      enum: roles,
-      required: true,
-    },
+    roles: [
+      {
+        type: String,
+        enum: roles,
+        required: true,
+      },
+    ],
     isDeleted: {
       type: Boolean,
       default: false,

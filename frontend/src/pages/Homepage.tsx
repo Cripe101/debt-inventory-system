@@ -1,12 +1,16 @@
 import { FiUser, FiList } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { authState } from "../store/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Homepage = () => {
   const navigate = useNavigate();
   const user = authState.user;
   const [click, setClick] = useState(false);
+
+  useEffect(() => {
+    // console.log("ID :: ", user.id);
+  }, []);
   return (
     <div className="flex flex-col gap-3 w-full p-2">
       {/* User Icon */}

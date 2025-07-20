@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 
 const addUser = async (data) => {
   if (!data.username) {
-    data.username = data.firstName + data.lastName;
+    data.username = data.firstName;
   }
 
   const doesExist = await User.findOne({ username: data.username });
@@ -29,17 +29,45 @@ const getUser = async (id) => {
   return user;
 };
 
-const updateUser = async ({ id, data }) => {
-  const user = await User.updateOne({ _id: id }, data);
+const updateUser = async ({ id, data, pushField = null }) => {
+  const user = await User.findById(id);
+  if (!user) return null;
 
-  return user;
+  // If you're pushing to an array field like 'inventory'
+  if (pushField === "inventory" && data[pushField]) {
+    const newItem = data[pushField];
+
+    // Check if product already exists in inventory
+    const exists = user.inventory.some(
+      (item) => item.product.toString() === newItem.product
+    );
+
+    if (!exists) {
+      user.inventory.push(newItem);
+    } else {
+      // Optionally update quantity if it already exists
+      user.inventory = user.inventory.map((item) =>
+        item.product.toString() === newItem.product
+          ? { ...item.toObject(), quantity: newItem.quantity }
+          : item
+      );
+    }
+
+    await user.save();
+    return user;
+  }
+
+  // Standard update for non-array fields
+  const updatedUser = await User.findByIdAndUpdate(id, data, {
+    new: true,
+    runValidators: true,
+  });
+
+  return updatedUser;
 };
 
 const deleteUser = async (id) => {
-  const user = await Employee.updateOne(
-    { _id: id },
-    { $set: { isDeleted: true } }
-  );
+  const user = await User.updateOne({ _id: id }, { $set: { isDeleted: true } });
 
   return user;
 };
